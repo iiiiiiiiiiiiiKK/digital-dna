@@ -31,7 +31,13 @@ export default defineConfig({
     },
     {
       name: 'iphone',
-      use: { ...devices['iPhone 13'] },
+      use: {
+        ...devices['iPhone 13'],
+        // iOS users frequently enable Reduce Motion, and our CSS explicitly
+        // supports it by collapsing animation durations. Running the iPhone
+        // project this way tests that supported path and removes timing flake.
+        reducedMotion: 'reduce',
+      },
     },
   ],
   webServer: {

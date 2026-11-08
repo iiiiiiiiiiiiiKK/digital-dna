@@ -19,6 +19,9 @@
     background-color: #04050a;
     /* Stop iOS rubber-band jitter while keeping normal scrolling. */
     -webkit-text-size-adjust: 100%;
+    /* Keeps programmatic/anchored scrolls clear of the sticky header, so a
+       control never ends up underneath it (also affects scrollIntoView). */
+    scroll-padding-top: 4.5rem;
   }
 
   body {
