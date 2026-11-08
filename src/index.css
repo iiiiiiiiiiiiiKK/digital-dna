@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    background-color: #04050a;
+    /* Stop iOS rubber-band jitter while keeping normal scrolling. */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ink-950 text-white antialiased;
+    margin: 0;
+    min-height: 100dvh;
+    font-family: theme('fontFamily.sans');
+    overflow-x: hidden;
+    /* Prevent long unbroken custom tags from widening the layout on phones. */
+    overflow-wrap: anywhere;
+  }
+
+  /* Respect users who ask for less motion. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  ::selection {
+    background: rgba(34, 230, 255, 0.28);
+  }
+
+  /* Visible, consistent focus rings for keyboard users. */
+  :focus-visible {
+    outline: 2px solid rgba(34, 230, 255, 0.75);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+
+  /* 16px minimum stops iOS Safari from zooming in when a field is focused.
+     Applied with !important below 768px because utility classes on individual
+     inputs would otherwise win and re-introduce the zoom. */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  @media (max-width: 767px) {
+    input,
+    textarea,
+    select {
+      font-size: 16px !important;
+    }
+  }
+
+  @media (min-width: 768px) {
+    input,
+    textarea,
+    select {
+      font-size: 14px;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #05070d;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #232b42;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #33405f;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+    padding-left: max(1rem, var(--safe-left));
+    padding-right: max(1rem, var(--safe-right));
+  }
+
+  .glass {
+    background: linear-gradient(160deg, rgba(20, 26, 44, 0.78), rgba(8, 11, 20, 0.86));
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(14px);
+  }
+
+  .panel {
+    @apply glass rounded-xl3;
+    box-shadow: 0 30px 80px -46px rgba(0, 0, 0, 0.95);
+  }
+
+  .chip {
+    @apply inline-flex select-none items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #b8c1d6;
+  }
+
+  .chip:hover {
+    border-color: rgba(34, 230, 255, 0.4);
+    color: #eaf6ff;
+  }
+
+  .chip[data-active='true'] {
+    border-color: rgba(34, 230, 255, 0.6);
+    background: rgba(34, 230, 255, 0.1);
+    color: #dffaff;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all;
+    min-height: 44px; /* Apple HIG minimum touch target */
+  }
+
+  .btn-primary {
+    @apply btn text-ink-950;
+    background: linear-gradient(100deg, #22e6ff, #7bd0ff 46%, #b14bff);
+    box-shadow: 0 14px 40px -20px rgba(34, 230, 255, 0.9);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.985);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.45;
+    box-shadow: none;
+  }
+
+  .btn-ghost {
+    @apply btn border text-white/80;
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.03);
+    min-height: 44px;
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+  }
+
+  .label {
+    @apply mb-2 block text-[11px] font-semibold uppercase tracking-[0.14em] text-white/45;
+  }
+
+  .field {
+    @apply w-full rounded-2xl border bg-black/35 px-4 py-3 text-white placeholder-white/25 transition-colors;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .field:focus {
+    outline: none;
+    border-color: rgba(34, 230, 255, 0.55);
+    box-shadow: 0 0 0 3px rgba(34, 230, 255, 0.12);
+  }
+
+  .kicker {
+    @apply text-[11px] font-semibold uppercase tracking-[0.32em] text-neon-cyan/70;
+  }
+
+  .h1 {
+    @apply text-[clamp(2rem,7vw,4.25rem)] font-semibold leading-[0.98] tracking-tightest;
+  }
+
+  .h2 {
+    @apply text-[clamp(1.35rem,3.6vw,2.1rem)] font-semibold leading-tight tracking-tight;
+  }
+
+  .muted {
+    @apply text-white/55;
+  }
+
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+  }
+
+  /* Horizontal scroller that never causes page-level overflow on iOS. */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  .safe-bottom {
+    padding-bottom: max(1rem, var(--safe-bottom));
+  }
+  .safe-top {
+    padding-top: max(0.5rem, var(--safe-top));
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .grain {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+}
