@@ -67,7 +67,10 @@ export type VisualStyleId =
 
 export interface Profile {
   id: string;
-  /** Rotating salt created once per profile so DNA codes cannot collide across profiles. */
+  /**
+   * Reserved for future multi-profile support. Deliberately NOT part of the DNA
+   * code or the geometry seed, so the identity number depends on answers alone.
+   */
   salt: string;
   nickname: string;
   bio: string;

@@ -52,8 +52,10 @@ export function EngineExplainer() {
                 <span className="ml-2 font-sans text-white/25">identical answers → identical seed</span>
               </li>
               <li>
-                dnaCode = &quot;DNA-&quot; + first 6 hex of FNV-1a-64(seed + profile salt)
-                <span className="ml-2 font-sans text-white/25">salt keeps numbers unique between local profiles</span>
+                dnaCode = &quot;DNA-&quot; + first 6 hex of FNV-1a-64(canonical JSON of your answers)
+                <span className="ml-2 font-sans text-white/25">
+                  derived from answers only — anyone can recompute it
+                </span>
               </li>
             </ul>
           </div>
