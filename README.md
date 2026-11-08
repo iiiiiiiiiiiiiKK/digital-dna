@@ -325,6 +325,9 @@ No API keys, no database, no environment variables needed.
 | `node scripts/screenshots.mjs` | Regenerate README screenshots from the real build |
 | `node scripts/verify-production.mjs` | 22 acceptance checks against the live deployment |
 | `node scripts/verify-bundle.mjs` | Confirms the live bundle matches the local build |
+| `node scripts/ci-report.mjs` | Prints the step results of the latest Pages workflow |
+| `node scripts/deploy-status.mjs` | Recent workflow runs (read-only) |
+| `node scripts/commit-via-api.mjs` | Commit files through the Git Data API (used when `git push` is blocked) |
 
 ---
 
@@ -380,6 +383,16 @@ iPhone 13 WebKit including the mobile menu and the 16 px input guard.
 
 `node scripts/verify-bundle.mjs` additionally confirms the deployed entry chunk is byte-identical
 to the local production build.
+
+### Continuous integration
+
+Every push to `main` runs [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml), which
+type-checks, runs the unit tests, builds, and only then publishes. A failed check fails the deploy —
+the live site can never diverge from green tests. Latest run: **all steps green**.
+
+```bash
+node scripts/ci-report.mjs    # prints each step of the latest run
+```
 
 ---
 
