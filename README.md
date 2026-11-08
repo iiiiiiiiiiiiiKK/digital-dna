@@ -323,6 +323,8 @@ No API keys, no database, no environment variables needed.
 | `npx playwright test` | E2E — 12 scenarios × desktop Chromium + iPhone WebKit |
 | `node scripts/layout-audit.mjs` | Responsive audit over 6 viewports × 5 routes |
 | `node scripts/screenshots.mjs` | Regenerate README screenshots from the real build |
+| `node scripts/verify-production.mjs` | 22 acceptance checks against the live deployment |
+| `node scripts/verify-bundle.mjs` | Confirms the live bundle matches the local build |
 
 ---
 
