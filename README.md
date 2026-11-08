@@ -8,7 +8,7 @@
 Answer a handful of questions about what you like, what you can do and how you work —
 get a deterministic, data-driven **double helix** you can download and share.
 
-[**Live demo →**](https://iiiiiiiiiiiiiKK.github.io/digital-dna/) ·
+[**Live demo →**](https://iiiiiiiiiiiiikk.github.io/digital-dna/) ·
 [Report a bug](https://github.com/iiiiiiiiiiiiiKK/digital-dna/issues) ·
 [Author on X](https://x.com/0xkillcoin)
 
@@ -369,6 +369,18 @@ node scripts/layout-audit.mjs             # 30 viewport/route combinations
 Asserts: zero horizontal document overflow, zero viewport-escaping elements, zero fields below
 16 px on small viewports (iOS focus-zoom guard), no control under 36 px tall.
 
+### Production acceptance — 22 checks against the live site
+
+`node scripts/verify-production.mjs` runs against the deployed GitHub Pages URL, not a local build:
+HTTP 200, hero copy, the author 𝕏 link (3 occurrences, `target="_blank"`), real SVG path data,
+a full create-to-result flow, all visualisations, IndexedDB persistence across reload, PNG
+download, public share round-trip in a fresh browser context, private mode producing no link,
+Compare with Demo labelling, Evolution, no console errors — then the same core checks again on
+iPhone 13 WebKit including the mobile menu and the 16 px input guard.
+
+`node scripts/verify-bundle.mjs` additionally confirms the deployed entry chunk is byte-identical
+to the local production build.
+
 ---
 
 ## 🗄 Data structure
@@ -448,8 +460,10 @@ profiles are discarded. A malformed file throws instead of silently importing ga
 
 ### GitHub Pages (what this project uses)
 
+**Live:** <https://iiiiiiiiiiiiikk.github.io/digital-dna/> — deployed and verified.
+
 The repository ships a workflow at [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml)
-that builds and publishes on every push to `main`.
+that builds, type-checks, runs the unit tests and publishes on every push to `main`.
 
 **One-time setup:** *Settings → Pages → Build and deployment → Source: **GitHub Actions***.
 
@@ -458,6 +472,10 @@ The build uses `base: '/digital-dna/'`. To deploy elsewhere:
 ```bash
 VITE_BASE=/ npm run build     # domain root, Vercel, Netlify, Cloudflare Pages
 ```
+
+> **Note on the host name:** GitHub Pages serves project sites from the lower-cased account
+> host (`iiiiiiiiiiiiikk.github.io`). Both casings resolve; the canonical link above is the one the
+> platform reports.
 
 ### Other static hosts
 

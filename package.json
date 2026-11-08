@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Digital DNA — turn your interests, skills and habits into a unique, shareable digital identity artwork.",
   "license": "MIT",
-  "homepage": "https://iiiiiiiiiiiiiKK.github.io/digital-dna/",
+  "homepage": "https://iiiiiiiiiiiiikk.github.io/digital-dna/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
